@@ -3,7 +3,7 @@ _base_ = '../mmaction2/configs/_base_/default_runtime.py'
 loso_dir ='../loso'
 ann_file = '../loso_split_s01.pkl'
 
-load_from = 'stgcnpp_8xb16-joint-motion-u100-80e_ntu60-xsub-keypoint-3d_20221230-650de5cc.pth'
+load_from = 'modified_checkpoint.pth' # See jupyternotebook for code to generate this
 
 # Model settings
 custom_layout = dict(
@@ -44,8 +44,7 @@ model = dict(
     cls_head=dict(
         type='GCNHead',
         num_classes=2,  # Set this to the number of action classes
-        in_channels=256,
-        loss_cls=dict(type='CrossEntropyLoss')
+        in_channels=256
     )
 )
 
@@ -54,12 +53,16 @@ dataset_type = 'PoseDataset'
 
 train_pipeline = [
     dict(type='PreNormalize3D'),
+    dict(type='UniformSampleFrames', clip_len=100),
+    dict(type='PoseDecode'),
     dict(type='FormatGCNInput', num_person=1),
     dict(type='PackActionInputs')
 ]
 
 val_pipeline = [
     dict(type='PreNormalize3D'),
+    dict(type='UniformSampleFrames', clip_len=100, num_clips=1, test_mode=True),
+    dict(type='PoseDecode'),
     dict(type='FormatGCNInput', num_person=1),
     dict(type='PackActionInputs')
 ]
@@ -119,4 +122,4 @@ param_scheduler = [
 
 optim_wrapper = dict(
 optimizer=dict(
-    type='SGD', lr=0.01, momentum=0.9, weight_decay=0.0005, nesterov=True))
+    type='SGD', lr=0.005, momentum=0.9, weight_decay=0.0005, nesterov=True))
