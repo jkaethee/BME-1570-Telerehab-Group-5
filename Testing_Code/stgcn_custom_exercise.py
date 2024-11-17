@@ -2,20 +2,36 @@ _base_ = '../mmaction2/configs/_base_/default_runtime.py'
 
 loso_dir ='../loso'
 ann_file = '../loso_split_s01.pkl'
+
+load_from = 'stgcnpp_8xb16-joint-motion-u100-80e_ntu60-xsub-keypoint-3d_20221230-650de5cc.pth'
+
 # Model settings
 custom_layout = dict(
-    num_node= 22,  # Total number of nodes in your skeleton
+    num_node= 22,
     inward= [
-        (1, 0), (2, 1), (3, 2),          # Spine: Waist -> Spine -> Chest -> Neck
-        (4, 3), (5, 4),                  # Neck -> Head -> Head tip
-        (6, 3), (8, 6), (9, 8),         # Left side: Neck -> Left collar -> Left upper arm -> Left forearm -> Left hand
-        (16, 9), (17, 16),              # Left hand -> Left lower leg -> Left leg toes
-        (10, 3), (11, 10), (13, 11),     # Right side: Neck -> Right collar -> Right upper arm -> Right forearm -> Right hand
-        (20, 13), (21, 20),              # Right hand -> Right foot -> Right leg toes
-        (14, 2), (15, 14),               # Left upper leg -> Left lower leg
-        (18, 2), (19, 18)                # Right upper leg -> Right lower leg
+        (1, 0),  # Waist -> Spine
+        (2, 1),  # Spine -> Chest
+        (3, 2),  # Chest -> Neck
+        (4, 3),  # Neck -> Head
+        (5, 4),  # Head -> Head tip
+        (6, 3),  # Neck -> Left collar
+        (7, 6),  # Left collar -> Left upper arm
+        (8, 7),  # Left upper arm -> Left forearm
+        (9, 8),  # Left forearm -> Left hand
+        (10, 3), # Neck -> Right collar
+        (11, 10), # Right collar -> Right upper arm
+        (12, 11), # Right upper arm -> Right forearm
+        (13, 12), # Right forearm -> Right hand
+        (14, 0),  # Waist -> Left upper leg
+        (15, 14), # Left upper leg -> Left lower leg
+        (16, 15), # Left lower leg -> Left foot
+        (17, 16), # Left foot -> Left leg toes
+        (18, 0),  # Waist -> Right upper leg
+        (19, 18), # Right upper leg -> Right lower leg
+        (20, 19), # Right lower leg -> Right foot
+        (21, 20)  # Right foot -> Right leg toes
     ],
-    center= 0  # Center node is the spine
+    center= 0
 )
 model = dict(
     type='RecognizerGCN',
@@ -23,22 +39,18 @@ model = dict(
         type='STGCN',
         gcn_adaptive='init',
         graph_cfg=dict(layout=custom_layout, mode="stgcn_spatial"),
-        in_channels=3,  # 3D input (xyz)
+        in_channels=3  # 3D input (xyz)
     ),
     cls_head=dict(
         type='GCNHead',
         num_classes=2,  # Set this to the number of action classes
         in_channels=256,
         loss_cls=dict(type='CrossEntropyLoss')
-    ),
-    train_cfg=dict(),
-    test_cfg=dict()
+    )
 )
 
 # Dataset settings
 dataset_type = 'PoseDataset'
-ann_file_train = 'data/custom/train.pkl'
-ann_file_val = 'data/custom/val.pkl'
 
 train_pipeline = [
     dict(type='PreNormalize3D'),
@@ -63,7 +75,8 @@ train_dataloader = dict(
         type=dataset_type,
         ann_file=ann_file,
         pipeline=train_pipeline,
-        split='xsub_train'))
+        split='xsub_train')
+)
 
 val_dataloader = dict(
     batch_size=32,
@@ -81,8 +94,9 @@ train_cfg = dict(
     type='EpochBasedTrainLoop', max_epochs=16, val_begin=1, val_interval=1
 )
 val_cfg = dict(type='ValLoop')
-val_evaluator = [dict(type='AccMetric')]
-
+val_evaluator = [
+    dict(type='AccMetric')
+]
 default_hooks = dict(
     checkpoint=dict(type='CheckpointHook', interval=1, save_best='auto'),  # Saves the best checkpoint
     early_stop=dict(
