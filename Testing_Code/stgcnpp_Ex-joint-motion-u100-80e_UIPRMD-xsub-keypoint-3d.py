@@ -1,7 +1,7 @@
-_base_ = 'stgcnpp_8xb16-joint-u100-80e_ntu60-xsub-keypoint-3d.py'
+_base_ = '../mmaction2/configs/skeleton/stgcnpp/stgcnpp_8xb16-joint-u100-80e_ntu60-xsub-keypoint-3d.py'
 
 dataset_type = 'PoseDataset'
-ann_file = 'E:\\Mina_Files\\school\\Master@UofT\\Uoft_Coding\\BME1570-Digital_Health\\Git\\BME-1570-Telerehab-Group-5\\loso_split_s01.pkl'
+ann_file = '../loso_split_s01.pkl'
 train_pipeline = [
     dict(type='PreNormalize3D'),
     dict(type='GenSkeFeat', dataset='ui-prmd', feats=['jm']),
