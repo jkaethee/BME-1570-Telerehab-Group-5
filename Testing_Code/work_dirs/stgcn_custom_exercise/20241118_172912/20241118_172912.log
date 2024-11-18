@@ -757,3 +757,7 @@ NormalInit: mean=0, std=0.01, bias=0
 2024/11/18 18:00:44 - mmengine - INFO - Saving checkpoint at 7 epochs
 2024/11/18 18:00:52 - mmengine - INFO - Epoch(val) [7][2/2]    acc/top1: 0.0917  acc/top5: 0.5000  acc/mean1: 0.0917  data_time: 0.0137  time: 3.0284
 2024/11/18 18:03:41 - mmengine - INFO - Epoch(train)  [8][20/34]  lr: 2.7163e-04  eta: 1:37:10  time: 8.4258  data_time: 0.0197  loss: 2.1451  top1_acc: 0.0156  top5_acc: 0.7656  loss_cls: 2.1451
+2024/11/18 18:05:42 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241118_172912
+2024/11/18 18:05:42 - mmengine - INFO - Epoch(train)  [8][34/34]  lr: 2.5144e-04  eta: 1:36:02  time: 8.3175  data_time: 0.0165  loss: 2.0549  top1_acc: 0.7500  top5_acc: 0.9792  loss_cls: 2.0549
+2024/11/18 18:05:42 - mmengine - INFO - Saving checkpoint at 8 epochs
+2024/11/18 18:05:51 - mmengine - INFO - Epoch(val) [8][2/2]    acc/top1: 0.1083  acc/top5: 0.5250  acc/mean1: 0.1083  data_time: 0.0153  time: 3.2410
