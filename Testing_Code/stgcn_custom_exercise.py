@@ -1,7 +1,7 @@
 _base_ = '../mmaction2/configs/_base_/default_runtime.py'
 
 loso_dir ='../loso'
-ann_file = '../datasets/12class-lowerbodyonly/loso_split_s01.pkl'
+ann_file = '../datasets/8class-upperbodyonly/loso_split_s01.pkl'
 
 load_from = 'modified_checkpoint.pth' # See jupyternotebook for code to generate this
 
@@ -43,7 +43,7 @@ model = dict(
     ),
     cls_head=dict(
         type='GCNHead',
-        num_classes=12,  # Set this to the number of action classes
+        num_classes=8,  # Set this to the number of action classes
         in_channels=256
     )
 )
@@ -52,12 +52,18 @@ model = dict(
 dataset_type = 'PoseDataset'
 
 train_pipeline = [
+    dict(type='GenSkeFeat', dataset='coco', feats=['jm']),
+    # dict(type='UniformSampleFrames', clip_len=100),
     dict(type='PoseDecode'),
     dict(type='FormatGCNInput', num_person=1),
     dict(type='PackActionInputs')
 ]
 
 val_pipeline = [
+    dict(type='GenSkeFeat', dataset='coco', feats=['jm']),
+    # dict(
+    #     type='UniformSampleFrames', clip_len=100, num_clips=10,
+    #     test_mode=True),
     dict(type='PoseDecode'),
     dict(type='FormatGCNInput', num_person=1),
     dict(type='PackActionInputs')
@@ -66,13 +72,13 @@ val_pipeline = [
 test_pipeline = val_pipeline
 
 train_dataloader = dict(
-    batch_size=64,
+    batch_size=16,
     num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
         type='RepeatDataset',
-        times=2,
+        times=1,
         dataset=dict(
             type=dataset_type,
             ann_file=ann_file,
@@ -81,7 +87,7 @@ train_dataloader = dict(
 )
 
 val_dataloader = dict(
-    batch_size=64,
+    batch_size=32,
     num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
@@ -93,7 +99,7 @@ val_dataloader = dict(
         test_mode=True))
 
 train_cfg = dict(
-    type='EpochBasedTrainLoop', max_epochs=30, val_begin=1, val_interval=1
+    type='EpochBasedTrainLoop', max_epochs=16, val_begin=1, val_interval=1
 )
 val_cfg = dict(type='ValLoop')
 val_evaluator = [
@@ -120,7 +126,7 @@ param_scheduler = [
 ]
 
 optim_wrapper = dict(
-    optimizer=dict(type='SGD', lr=5e-4, momentum=0.9, weight_decay=0.0005, nesterov=True),
-    # clip_grad=dict(max_norm=100, norm_type=2)
-)
+    optimizer=dict(type="SGD", lr=1e-6, momentum=0.9, weight_decay=0.0003),
+    clip_grad=dict(max_norm=40, norm_type=2))
+
 
