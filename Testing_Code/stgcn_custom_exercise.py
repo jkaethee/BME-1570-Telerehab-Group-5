@@ -1,7 +1,7 @@
 _base_ = '../mmaction2/configs/_base_/default_runtime.py'
 
 loso_dir ='../loso'
-ann_file = '../datasets/8class-upperbodyonly/loso_split_s01.pkl'
+ann_file = '../datasets/2class-all/loso_split_s01.pkl'
 
 load_from = 'modified_checkpoint.pth' # See jupyternotebook for code to generate this
 
@@ -38,12 +38,14 @@ model = dict(
     backbone=dict(
         type='STGCN',
         gcn_adaptive='init',
+        gcn_with_res=True,
+        tcn_type='mstcn',
         graph_cfg=dict(layout=custom_layout, mode="stgcn_spatial"),
         in_channels=3  # 3D input (xyz)
     ),
     cls_head=dict(
         type='GCNHead',
-        num_classes=8,  # Set this to the number of action classes
+        num_classes=2,  # Set this to the number of action classes
         in_channels=256
     )
 )
@@ -53,32 +55,22 @@ dataset_type = 'PoseDataset'
 
 train_pipeline = [
     dict(type='GenSkeFeat', dataset='coco', feats=['jm']),
-    # dict(type='UniformSampleFrames', clip_len=100),
+    dict(type='UniformSampleFrames', clip_len=100),
     dict(type='PoseDecode'),
     dict(type='FormatGCNInput', num_person=1),
     dict(type='PackActionInputs')
 ]
 
-val_pipeline = [
-    dict(type='GenSkeFeat', dataset='coco', feats=['jm']),
-    # dict(
-    #     type='UniformSampleFrames', clip_len=100, num_clips=10,
-    #     test_mode=True),
-    dict(type='PoseDecode'),
-    dict(type='FormatGCNInput', num_person=1),
-    dict(type='PackActionInputs')
-]
-
-test_pipeline = val_pipeline
+val_pipeline = train_pipeline
 
 train_dataloader = dict(
-    batch_size=16,
+    batch_size=32,
     num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
         type='RepeatDataset',
-        times=1,
+        times=5,
         dataset=dict(
             type=dataset_type,
             ann_file=ann_file,
@@ -90,7 +82,7 @@ val_dataloader = dict(
     batch_size=32,
     num_workers=8,
     persistent_workers=True,
-    sampler=dict(type='DefaultSampler', shuffle=False),
+    sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
         type=dataset_type,
         ann_file=ann_file,
@@ -107,12 +99,12 @@ val_evaluator = [
 ]
 default_hooks = dict(
     checkpoint=dict(type='CheckpointHook', interval=1, save_best='auto'),  # Saves the best checkpoint
-    # early_stop=dict(
-    #     type='EarlyStoppingHook', 
-    #     patience=5,  # Number of epochs with no improvement before stopping
-    #     monitor='acc/top1',  # Metric to monitor (ensure it's available in your logs)
-    #     rule='greater'  # 'greater' for metrics that should increase (like accuracy)
-    # )
+    early_stop=dict(
+        type='EarlyStoppingHook', 
+        patience=5,  # Number of epochs with no improvement before stopping
+        monitor='acc/top1',  # Metric to monitor (ensure it's available in your logs)
+        rule='greater'  # 'greater' for metrics that should increase (like accuracy)
+    )
 )
 
 # Optimizer and scheduler
@@ -126,7 +118,5 @@ param_scheduler = [
 ]
 
 optim_wrapper = dict(
-    optimizer=dict(type="SGD", lr=1e-6, momentum=0.9, weight_decay=0.0003),
-    clip_grad=dict(max_norm=40, norm_type=2))
-
+    optimizer=dict(type='SGD', lr=1e-4, momentum=0.9, weight_decay=0.0005, nesterov=True))
 
