@@ -1744,3 +1744,46 @@ NormalInit: mean=0, std=0.01, bias=0
 2024/11/20 18:45:29 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_184246
 2024/11/20 18:45:29 - mmengine - INFO - Epoch(train)  [1][57/57]  lr: 9.9073e-05  eta: 0:37:02  time: 1.3569  data_time: 0.0066  memory: 3451  loss: 0.6085  top1_acc: 0.5000  top5_acc: 1.0000  loss_cls: 0.6085
 2024/11/20 18:45:29 - mmengine - INFO - Saving checkpoint at 1 epochs
+2024/11/20 18:46:45 - mmengine - INFO - Epoch(val) [1][7/7]    acc/top1: 0.7100  acc/top5: 1.0000  acc/mean1: 0.7100  data_time: 10.0164  time: 10.6379
+2024/11/20 18:46:47 - mmengine - INFO - The best checkpoint with 0.7100 acc/top1 at 1 epoch is saved to best_acc_top1_epoch_1.pth.
+2024/11/20 18:47:22 - mmengine - INFO - Epoch(train)  [2][20/57]  lr: 9.8296e-05  eta: 0:32:46  time: 1.6568  data_time: 0.0173  memory: 3812  loss: 0.4705  top1_acc: 0.7188  top5_acc: 1.0000  loss_cls: 0.4705
+2024/11/20 18:47:51 - mmengine - INFO - Epoch(train)  [2][40/57]  lr: 9.7291e-05  eta: 0:29:30  time: 1.4671  data_time: 0.0104  memory: 3812  loss: 0.3981  top1_acc: 0.8438  top5_acc: 1.0000  loss_cls: 0.3981
+2024/11/20 18:48:19 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_184246
+2024/11/20 18:48:19 - mmengine - INFO - Epoch(train)  [2][57/57]  lr: 9.6260e-05  eta: 0:27:51  time: 1.7128  data_time: 0.0097  memory: 4123  loss: 0.4249  top1_acc: 0.7500  top5_acc: 1.0000  loss_cls: 0.4249
+2024/11/20 18:48:19 - mmengine - INFO - Saving checkpoint at 2 epochs
+2024/11/20 18:48:24 - mmengine - INFO - Epoch(val) [2][7/7]    acc/top1: 0.7200  acc/top5: 1.0000  acc/mean1: 0.7200  data_time: 0.0072  time: 0.5168
+2024/11/20 18:48:24 - mmengine - INFO - The previous best checkpoint C:\Users\Jathu\OneDrive\Desktop\Masters of Biomedical Engineering - UofT\Fall 2024\BME 1570 - Intro to Digital Health\codebase\Testing_Code\work_dirs_wednesday_nosamples\lr_0.0001_bs_32\best_acc_top1_epoch_1.pth is removed
+2024/11/20 18:48:25 - mmengine - INFO - The best checkpoint with 0.7200 acc/top1 at 2 epoch is saved to best_acc_top1_epoch_2.pth.
+2024/11/20 18:48:59 - mmengine - INFO - Epoch(train)  [3][20/57]  lr: 9.4844e-05  eta: 0:26:14  time: 1.6233  data_time: 0.0164  memory: 3812  loss: 0.4011  top1_acc: 0.9062  top5_acc: 1.0000  loss_cls: 0.4011
+2024/11/20 18:49:35 - mmengine - INFO - Epoch(train)  [3][40/57]  lr: 9.3215e-05  eta: 0:25:09  time: 1.7747  data_time: 0.0122  memory: 4123  loss: 0.3716  top1_acc: 0.9062  top5_acc: 1.0000  loss_cls: 0.3716
+2024/11/20 18:49:59 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_184246
+2024/11/20 18:49:59 - mmengine - INFO - Epoch(train)  [3][57/57]  lr: 9.1669e-05  eta: 0:23:52  time: 1.4176  data_time: 0.0111  memory: 3496  loss: 0.3487  top1_acc: 0.6250  top5_acc: 1.0000  loss_cls: 0.3487
+2024/11/20 18:49:59 - mmengine - INFO - Saving checkpoint at 3 epochs
+2024/11/20 18:50:05 - mmengine - INFO - Epoch(val) [3][7/7]    acc/top1: 0.7550  acc/top5: 1.0000  acc/mean1: 0.7550  data_time: 0.0106  time: 0.5548
+2024/11/20 18:50:05 - mmengine - INFO - The previous best checkpoint C:\Users\Jathu\OneDrive\Desktop\Masters of Biomedical Engineering - UofT\Fall 2024\BME 1570 - Intro to Digital Health\codebase\Testing_Code\work_dirs_wednesday_nosamples\lr_0.0001_bs_32\best_acc_top1_epoch_2.pth is removed
+2024/11/20 18:50:06 - mmengine - INFO - The best checkpoint with 0.7550 acc/top1 at 3 epoch is saved to best_acc_top1_epoch_3.pth.
+2024/11/20 18:50:37 - mmengine - INFO - Epoch(train)  [4][20/57]  lr: 8.9668e-05  eta: 0:22:38  time: 1.4632  data_time: 0.0171  memory: 3679  loss: 0.3190  top1_acc: 0.9062  top5_acc: 1.0000  loss_cls: 0.3190
+2024/11/20 18:51:09 - mmengine - INFO - Epoch(train)  [4][40/57]  lr: 8.7478e-05  eta: 0:21:40  time: 1.5739  data_time: 0.0103  memory: 3812  loss: 0.3010  top1_acc: 0.8125  top5_acc: 1.0000  loss_cls: 0.3010
+2024/11/20 18:51:37 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_184246
+2024/11/20 18:51:37 - mmengine - INFO - Epoch(train)  [4][57/57]  lr: 8.5477e-05  eta: 0:20:59  time: 1.6795  data_time: 0.0129  memory: 4123  loss: 0.2970  top1_acc: 0.6250  top5_acc: 1.0000  loss_cls: 0.2970
+2024/11/20 18:51:37 - mmengine - INFO - Saving checkpoint at 4 epochs
+2024/11/20 18:51:44 - mmengine - INFO - Epoch(val) [4][7/7]    acc/top1: 0.7650  acc/top5: 1.0000  acc/mean1: 0.7650  data_time: 0.0143  time: 0.5786
+2024/11/20 18:51:44 - mmengine - INFO - The previous best checkpoint C:\Users\Jathu\OneDrive\Desktop\Masters of Biomedical Engineering - UofT\Fall 2024\BME 1570 - Intro to Digital Health\codebase\Testing_Code\work_dirs_wednesday_nosamples\lr_0.0001_bs_32\best_acc_top1_epoch_3.pth is removed
+2024/11/20 18:51:46 - mmengine - INFO - The best checkpoint with 0.7650 acc/top1 at 4 epoch is saved to best_acc_top1_epoch_4.pth.
+2024/11/20 18:52:17 - mmengine - INFO - Epoch(train)  [5][20/57]  lr: 8.2967e-05  eta: 0:20:03  time: 1.4760  data_time: 0.0196  memory: 3679  loss: 0.2699  top1_acc: 0.8750  top5_acc: 1.0000  loss_cls: 0.2699
+2024/11/20 18:52:51 - mmengine - INFO - Epoch(train)  [5][40/57]  lr: 8.0301e-05  eta: 0:19:21  time: 1.7084  data_time: 0.0217  memory: 3812  loss: 0.2881  top1_acc: 0.7188  top5_acc: 1.0000  loss_cls: 0.2881
+2024/11/20 18:53:23 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_184246
+2024/11/20 18:53:23 - mmengine - INFO - Epoch(train)  [5][57/57]  lr: 7.7922e-05  eta: 0:18:52  time: 1.7903  data_time: 0.0152  memory: 4123  loss: 0.2670  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.2670
+2024/11/20 18:53:23 - mmengine - INFO - Saving checkpoint at 5 epochs
+2024/11/20 18:53:29 - mmengine - INFO - Epoch(val) [5][7/7]    acc/top1: 0.8000  acc/top5: 1.0000  acc/mean1: 0.8000  data_time: 0.0095  time: 0.5609
+2024/11/20 18:53:29 - mmengine - INFO - The previous best checkpoint C:\Users\Jathu\OneDrive\Desktop\Masters of Biomedical Engineering - UofT\Fall 2024\BME 1570 - Intro to Digital Health\codebase\Testing_Code\work_dirs_wednesday_nosamples\lr_0.0001_bs_32\best_acc_top1_epoch_4.pth is removed
+2024/11/20 18:53:30 - mmengine - INFO - The best checkpoint with 0.8000 acc/top1 at 5 epoch is saved to best_acc_top1_epoch_5.pth.
+2024/11/20 18:54:02 - mmengine - INFO - Epoch(train)  [6][20/57]  lr: 7.5000e-05  eta: 0:18:03  time: 1.4837  data_time: 0.0102  memory: 3812  loss: 0.2383  top1_acc: 0.8438  top5_acc: 1.0000  loss_cls: 0.2383
+2024/11/20 18:54:34 - mmengine - INFO - Epoch(train)  [6][40/57]  lr: 7.1960e-05  eta: 0:17:22  time: 1.6297  data_time: 0.0058  memory: 3812  loss: 0.2290  top1_acc: 0.9688  top5_acc: 1.0000  loss_cls: 0.2290
+2024/11/20 18:54:59 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_184246
+2024/11/20 18:54:59 - mmengine - INFO - Epoch(train)  [6][57/57]  lr: 6.9293e-05  eta: 0:16:43  time: 1.4741  data_time: 0.0064  memory: 4123  loss: 0.2487  top1_acc: 0.8750  top5_acc: 1.0000  loss_cls: 0.2487
+2024/11/20 18:54:59 - mmengine - INFO - Saving checkpoint at 6 epochs
+2024/11/20 18:55:05 - mmengine - INFO - Epoch(val) [6][7/7]    acc/top1: 0.7600  acc/top5: 1.0000  acc/mean1: 0.7600  data_time: 0.0090  time: 0.5455
+2024/11/20 18:55:05 - mmengine - INFO - the monitored metric did not improve in the last 5 records. best score: 0.710. 
+2024/11/20 18:55:11 - mmengine - INFO - Epoch(val) [6][7/7]    acc/top1: 0.7600  acc/top5: 1.0000  acc/mean1: 0.7600  data_time: 0.0108  time: 0.6084
+2024/11/20 18:55:11 - mmengine - INFO - the monitored metric did not improve in the last 6 records. best score: 0.710. 
