@@ -1,0 +1,1836 @@
+2024/11/20 19:40:01 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: win32
+    Python: 3.8.20 (default, Oct  3 2024, 15:19:54) [MSC v.1929 64 bit (AMD64)]
+    CUDA available: True
+    MUSA available: False
+    numpy_random_seed: 4236488
+    GPU 0: NVIDIA GeForce GTX 1650
+    CUDA_HOME: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1
+    NVCC: Cuda compilation tools, release 12.1, V12.1.66
+    MSVC: Microsoft (R) C/C++ Optimizing Compiler Version 19.35.32215 for x64
+    GCC: n/a
+    PyTorch: 2.4.1+cu118
+    PyTorch compiling details: PyTorch built with:
+  - C++ Version: 201703
+  - MSVC 192930154
+  - Intel(R) oneAPI Math Kernel Library Version 2024.2.1-Product Build 20240722 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v3.4.2 (Git Hash 1137e04ec0b5251ca2b4400a4fd3c667ce843d67)
+  - OpenMP 2019
+  - LAPACK is enabled (usually provided by MKL)
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.8
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_90,code=sm_90;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 90.1
+  - Magma 2.5.4
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.8, CUDNN_VERSION=9.1.0, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/builder/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /GR /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DUSE_FBGEMM -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=2.4.1, USE_CUDA=ON, USE_CUDNN=ON, USE_CUSPARSELT=OFF, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, 
+
+    TorchVision: 0.19.1+cu118
+    OpenCV: 4.10.0
+    MMEngine: 0.10.5
+
+Runtime environment:
+    cudnn_benchmark: False
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    dist_cfg: {'backend': 'nccl'}
+    seed: 4236488
+    diff_rank_seed: False
+    deterministic: False
+    Distributed launcher: none
+    Distributed training: False
+    GPU number: 1
+------------------------------------------------------------
+
+2024/11/20 19:40:03 - mmengine - INFO - Config:
+ann_file = '../datasets/2class-all/loso_split_s01.pkl'
+custom_layout = dict(
+    center=0,
+    inward=[
+        (
+            1,
+            0,
+        ),
+        (
+            2,
+            1,
+        ),
+        (
+            3,
+            2,
+        ),
+        (
+            4,
+            3,
+        ),
+        (
+            5,
+            4,
+        ),
+        (
+            6,
+            3,
+        ),
+        (
+            7,
+            6,
+        ),
+        (
+            8,
+            7,
+        ),
+        (
+            9,
+            8,
+        ),
+        (
+            10,
+            3,
+        ),
+        (
+            11,
+            10,
+        ),
+        (
+            12,
+            11,
+        ),
+        (
+            13,
+            12,
+        ),
+        (
+            14,
+            0,
+        ),
+        (
+            15,
+            14,
+        ),
+        (
+            16,
+            15,
+        ),
+        (
+            17,
+            16,
+        ),
+        (
+            18,
+            0,
+        ),
+        (
+            19,
+            18,
+        ),
+        (
+            20,
+            19,
+        ),
+        (
+            21,
+            20,
+        ),
+    ],
+    num_node=22)
+dataset_type = 'PoseDataset'
+default_hooks = dict(
+    checkpoint=dict(interval=1, save_best='auto', type='CheckpointHook'),
+    early_stop=dict(
+        monitor='acc/top1',
+        patience=5,
+        rule='greater',
+        type='EarlyStoppingHook'),
+    logger=dict(ignore_last=False, interval=20, type='LoggerHook'),
+    param_scheduler=dict(type='ParamSchedulerHook'),
+    runtime_info=dict(type='RuntimeInfoHook'),
+    sampler_seed=dict(type='DistSamplerSeedHook'),
+    sync_buffers=dict(type='SyncBuffersHook'),
+    timer=dict(type='IterTimerHook'))
+default_scope = 'mmaction'
+env_cfg = dict(
+    cudnn_benchmark=False,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+launcher = 'none'
+load_from = 'modified_checkpoint.pth'
+log_level = 'INFO'
+log_processor = dict(by_epoch=True, type='LogProcessor', window_size=20)
+loso_dir = '../loso'
+model = dict(
+    backbone=dict(
+        gcn_adaptive='init',
+        gcn_with_res=True,
+        graph_cfg=dict(
+            layout=dict(
+                center=0,
+                inward=[
+                    (
+                        1,
+                        0,
+                    ),
+                    (
+                        2,
+                        1,
+                    ),
+                    (
+                        3,
+                        2,
+                    ),
+                    (
+                        4,
+                        3,
+                    ),
+                    (
+                        5,
+                        4,
+                    ),
+                    (
+                        6,
+                        3,
+                    ),
+                    (
+                        7,
+                        6,
+                    ),
+                    (
+                        8,
+                        7,
+                    ),
+                    (
+                        9,
+                        8,
+                    ),
+                    (
+                        10,
+                        3,
+                    ),
+                    (
+                        11,
+                        10,
+                    ),
+                    (
+                        12,
+                        11,
+                    ),
+                    (
+                        13,
+                        12,
+                    ),
+                    (
+                        14,
+                        0,
+                    ),
+                    (
+                        15,
+                        14,
+                    ),
+                    (
+                        16,
+                        15,
+                    ),
+                    (
+                        17,
+                        16,
+                    ),
+                    (
+                        18,
+                        0,
+                    ),
+                    (
+                        19,
+                        18,
+                    ),
+                    (
+                        20,
+                        19,
+                    ),
+                    (
+                        21,
+                        20,
+                    ),
+                ],
+                num_node=22),
+            mode='stgcn_spatial'),
+        in_channels=3,
+        tcn_type='mstcn',
+        type='STGCN'),
+    cls_head=dict(in_channels=256, num_classes=2, type='GCNHead'),
+    type='RecognizerGCN')
+optim_wrapper = dict(
+    optimizer=dict(
+        lr=0.001, momentum=0.9, nesterov=True, type='SGD',
+        weight_decay=0.0005))
+param_scheduler = [
+    dict(
+        T_max=16,
+        by_epoch=True,
+        convert_to_iter_based=True,
+        eta_min=0,
+        type='CosineAnnealingLR'),
+]
+randomness = dict(deterministic=False, diff_rank_seed=False, seed=None)
+resume = False
+train_cfg = dict(
+    max_epochs=16, type='EpochBasedTrainLoop', val_begin=1, val_interval=1)
+train_dataloader = dict(
+    batch_size=16,
+    dataset=dict(
+        dataset=dict(
+            ann_file='../datasets/2class-all/loso_split_s01.pkl',
+            pipeline=[
+                dict(dataset='coco', feats=[
+                    'jm',
+                ], type='GenSkeFeat'),
+                dict(type='PoseDecode'),
+                dict(num_person=1, type='FormatGCNInput'),
+                dict(type='PackActionInputs'),
+            ],
+            split='xsub_train',
+            type='PoseDataset'),
+        times=2,
+        type='RepeatDataset'),
+    num_workers=8,
+    persistent_workers=True,
+    sampler=dict(shuffle=True, type='DefaultSampler'))
+train_pipeline = [
+    dict(dataset='coco', feats=[
+        'jm',
+    ], type='GenSkeFeat'),
+    dict(type='PoseDecode'),
+    dict(num_person=1, type='FormatGCNInput'),
+    dict(type='PackActionInputs'),
+]
+val_cfg = dict(type='ValLoop')
+val_dataloader = dict(
+    batch_size=32,
+    dataset=dict(
+        ann_file='../datasets/2class-all/loso_split_s01.pkl',
+        pipeline=[
+            dict(dataset='coco', feats=[
+                'jm',
+            ], type='GenSkeFeat'),
+            dict(type='PoseDecode'),
+            dict(num_person=1, type='FormatGCNInput'),
+            dict(type='PackActionInputs'),
+        ],
+        split='xsub_val',
+        test_mode=True,
+        type='PoseDataset'),
+    num_workers=8,
+    persistent_workers=True,
+    sampler=dict(shuffle=True, type='DefaultSampler'))
+val_evaluator = [
+    dict(type='AccMetric'),
+]
+val_pipeline = [
+    dict(dataset='coco', feats=[
+        'jm',
+    ], type='GenSkeFeat'),
+    dict(type='PoseDecode'),
+    dict(num_person=1, type='FormatGCNInput'),
+    dict(type='PackActionInputs'),
+]
+vis_backends = [
+    dict(type='LocalVisBackend'),
+]
+visualizer = dict(
+    type='ActionVisualizer', vis_backends=[
+        dict(type='LocalVisBackend'),
+    ])
+work_dir = './work_dirs_wednesday_nosamples/lr_0.001_bs_16'
+
+2024/11/20 19:40:07 - mmengine - INFO - Distributed training is not used, all SyncBatchNorm (SyncBN) layers in the model will be automatically reverted to BatchNormXd layers if they are used.
+2024/11/20 19:40:07 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(BELOW_NORMAL) LoggerHook                         
+(LOWEST      ) EarlyStoppingHook                  
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SyncBuffersHook                    
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SyncBuffersHook                    
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+(LOWEST      ) EarlyStoppingHook                  
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+2024/11/20 19:40:09 - mmengine - INFO - 1800 videos remain after valid thresholding
+2024/11/20 19:41:30 - mmengine - INFO - 200 videos remain after valid thresholding
+Name of parameter - Initialization information
+
+backbone.data_bn.weight - torch.Size([66]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.data_bn.bias - torch.Size([66]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.gcn.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.gcn.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.gcn.conv.weight - torch.Size([192, 3, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.gcn.conv.bias - torch.Size([192]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.gcn.down.0.weight - torch.Size([64, 3, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.gcn.down.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.gcn.down.1.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.gcn.down.1.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.0.0.weight - torch.Size([14, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.0.0.bias - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.0.1.weight - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.0.1.bias - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.0.3.conv.weight - torch.Size([14, 14, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.0.tcn.branches.0.3.conv.bias - torch.Size([14]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.0.tcn.branches.1.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.1.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.1.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.1.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.1.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.0.tcn.branches.1.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.0.tcn.branches.2.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.2.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.2.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.2.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.2.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.0.tcn.branches.2.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.0.tcn.branches.3.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.3.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.3.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.3.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.3.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.0.tcn.branches.3.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.0.tcn.branches.4.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.4.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.4.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.4.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.5.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.branches.5.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.transform.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.transform.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.transform.2.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.transform.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.0.tcn.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.gcn.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.gcn.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.gcn.conv.weight - torch.Size([192, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.gcn.conv.bias - torch.Size([192]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.0.0.weight - torch.Size([14, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.0.0.bias - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.0.1.weight - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.0.1.bias - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.0.3.conv.weight - torch.Size([14, 14, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.1.tcn.branches.0.3.conv.bias - torch.Size([14]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.1.tcn.branches.1.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.1.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.1.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.1.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.1.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.1.tcn.branches.1.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.1.tcn.branches.2.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.2.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.2.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.2.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.2.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.1.tcn.branches.2.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.1.tcn.branches.3.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.3.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.3.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.3.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.3.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.1.tcn.branches.3.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.1.tcn.branches.4.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.4.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.4.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.4.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.5.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.branches.5.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.transform.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.transform.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.transform.2.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.transform.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.1.tcn.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.gcn.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.gcn.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.gcn.conv.weight - torch.Size([192, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.gcn.conv.bias - torch.Size([192]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.0.0.weight - torch.Size([14, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.0.0.bias - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.0.1.weight - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.0.1.bias - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.0.3.conv.weight - torch.Size([14, 14, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.2.tcn.branches.0.3.conv.bias - torch.Size([14]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.2.tcn.branches.1.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.1.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.1.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.1.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.1.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.2.tcn.branches.1.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.2.tcn.branches.2.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.2.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.2.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.2.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.2.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.2.tcn.branches.2.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.2.tcn.branches.3.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.3.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.3.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.3.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.3.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.2.tcn.branches.3.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.2.tcn.branches.4.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.4.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.4.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.4.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.5.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.branches.5.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.transform.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.transform.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.transform.2.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.transform.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.2.tcn.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.gcn.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.gcn.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.gcn.conv.weight - torch.Size([192, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.gcn.conv.bias - torch.Size([192]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.0.0.weight - torch.Size([14, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.0.0.bias - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.0.1.weight - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.0.1.bias - torch.Size([14]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.0.3.conv.weight - torch.Size([14, 14, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.3.tcn.branches.0.3.conv.bias - torch.Size([14]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.3.tcn.branches.1.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.1.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.1.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.1.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.1.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.3.tcn.branches.1.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.3.tcn.branches.2.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.2.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.2.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.2.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.2.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.3.tcn.branches.2.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.3.tcn.branches.3.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.3.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.3.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.3.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.3.3.conv.weight - torch.Size([10, 10, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.3.tcn.branches.3.3.conv.bias - torch.Size([10]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.3.tcn.branches.4.0.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.4.0.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.4.1.weight - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.4.1.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.5.weight - torch.Size([10, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.branches.5.bias - torch.Size([10]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.transform.0.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.transform.0.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.transform.2.weight - torch.Size([64, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.transform.2.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.bn.weight - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.3.tcn.bn.bias - torch.Size([64]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.gcn.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.gcn.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.gcn.conv.weight - torch.Size([384, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.gcn.conv.bias - torch.Size([384]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.gcn.down.0.weight - torch.Size([128, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.gcn.down.0.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.gcn.down.1.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.gcn.down.1.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.0.0.weight - torch.Size([23, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.0.0.bias - torch.Size([23]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.0.1.weight - torch.Size([23]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.0.1.bias - torch.Size([23]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.0.3.conv.weight - torch.Size([23, 23, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.tcn.branches.0.3.conv.bias - torch.Size([23]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.tcn.branches.1.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.1.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.1.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.1.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.1.3.conv.weight - torch.Size([21, 21, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.tcn.branches.1.3.conv.bias - torch.Size([21]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.tcn.branches.2.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.2.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.2.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.2.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.2.3.conv.weight - torch.Size([21, 21, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.tcn.branches.2.3.conv.bias - torch.Size([21]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.tcn.branches.3.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.3.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.3.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.3.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.3.3.conv.weight - torch.Size([21, 21, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.tcn.branches.3.3.conv.bias - torch.Size([21]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.tcn.branches.4.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.4.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.4.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.4.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.5.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.branches.5.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.transform.0.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.transform.0.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.transform.2.weight - torch.Size([128, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.transform.2.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.tcn.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.residual.conv.weight - torch.Size([128, 64, 1, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.residual.conv.bias - torch.Size([128]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.4.residual.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.4.residual.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.gcn.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.gcn.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.gcn.conv.weight - torch.Size([384, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.gcn.conv.bias - torch.Size([384]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.0.0.weight - torch.Size([23, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.0.0.bias - torch.Size([23]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.0.1.weight - torch.Size([23]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.0.1.bias - torch.Size([23]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.0.3.conv.weight - torch.Size([23, 23, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.5.tcn.branches.0.3.conv.bias - torch.Size([23]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.5.tcn.branches.1.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.1.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.1.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.1.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.1.3.conv.weight - torch.Size([21, 21, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.5.tcn.branches.1.3.conv.bias - torch.Size([21]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.5.tcn.branches.2.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.2.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.2.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.2.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.2.3.conv.weight - torch.Size([21, 21, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.5.tcn.branches.2.3.conv.bias - torch.Size([21]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.5.tcn.branches.3.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.3.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.3.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.3.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.3.3.conv.weight - torch.Size([21, 21, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.5.tcn.branches.3.3.conv.bias - torch.Size([21]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.5.tcn.branches.4.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.4.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.4.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.4.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.5.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.branches.5.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.transform.0.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.transform.0.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.transform.2.weight - torch.Size([128, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.transform.2.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.5.tcn.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.gcn.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.gcn.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.gcn.conv.weight - torch.Size([384, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.gcn.conv.bias - torch.Size([384]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.0.0.weight - torch.Size([23, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.0.0.bias - torch.Size([23]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.0.1.weight - torch.Size([23]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.0.1.bias - torch.Size([23]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.0.3.conv.weight - torch.Size([23, 23, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.6.tcn.branches.0.3.conv.bias - torch.Size([23]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.6.tcn.branches.1.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.1.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.1.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.1.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.1.3.conv.weight - torch.Size([21, 21, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.6.tcn.branches.1.3.conv.bias - torch.Size([21]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.6.tcn.branches.2.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.2.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.2.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.2.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.2.3.conv.weight - torch.Size([21, 21, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.6.tcn.branches.2.3.conv.bias - torch.Size([21]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.6.tcn.branches.3.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.3.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.3.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.3.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.3.3.conv.weight - torch.Size([21, 21, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.6.tcn.branches.3.3.conv.bias - torch.Size([21]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.6.tcn.branches.4.0.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.4.0.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.4.1.weight - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.4.1.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.5.weight - torch.Size([21, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.branches.5.bias - torch.Size([21]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.transform.0.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.transform.0.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.transform.2.weight - torch.Size([128, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.transform.2.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.bn.weight - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.6.tcn.bn.bias - torch.Size([128]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.gcn.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.gcn.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.gcn.conv.weight - torch.Size([768, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.gcn.conv.bias - torch.Size([768]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.gcn.down.0.weight - torch.Size([256, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.gcn.down.0.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.gcn.down.1.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.gcn.down.1.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.0.0.weight - torch.Size([46, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.0.0.bias - torch.Size([46]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.0.1.weight - torch.Size([46]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.0.1.bias - torch.Size([46]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.0.3.conv.weight - torch.Size([46, 46, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.tcn.branches.0.3.conv.bias - torch.Size([46]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.tcn.branches.1.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.1.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.1.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.1.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.1.3.conv.weight - torch.Size([42, 42, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.tcn.branches.1.3.conv.bias - torch.Size([42]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.tcn.branches.2.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.2.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.2.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.2.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.2.3.conv.weight - torch.Size([42, 42, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.tcn.branches.2.3.conv.bias - torch.Size([42]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.tcn.branches.3.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.3.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.3.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.3.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.3.3.conv.weight - torch.Size([42, 42, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.tcn.branches.3.3.conv.bias - torch.Size([42]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.tcn.branches.4.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.4.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.4.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.4.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.5.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.branches.5.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.transform.0.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.transform.0.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.transform.2.weight - torch.Size([256, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.transform.2.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.tcn.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.residual.conv.weight - torch.Size([256, 128, 1, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.residual.conv.bias - torch.Size([256]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.7.residual.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.7.residual.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.gcn.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.gcn.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.gcn.conv.weight - torch.Size([768, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.gcn.conv.bias - torch.Size([768]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.0.0.weight - torch.Size([46, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.0.0.bias - torch.Size([46]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.0.1.weight - torch.Size([46]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.0.1.bias - torch.Size([46]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.0.3.conv.weight - torch.Size([46, 46, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.8.tcn.branches.0.3.conv.bias - torch.Size([46]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.8.tcn.branches.1.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.1.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.1.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.1.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.1.3.conv.weight - torch.Size([42, 42, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.8.tcn.branches.1.3.conv.bias - torch.Size([42]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.8.tcn.branches.2.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.2.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.2.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.2.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.2.3.conv.weight - torch.Size([42, 42, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.8.tcn.branches.2.3.conv.bias - torch.Size([42]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.8.tcn.branches.3.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.3.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.3.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.3.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.3.3.conv.weight - torch.Size([42, 42, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.8.tcn.branches.3.3.conv.bias - torch.Size([42]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.8.tcn.branches.4.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.4.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.4.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.4.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.5.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.branches.5.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.transform.0.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.transform.0.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.transform.2.weight - torch.Size([256, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.transform.2.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.8.tcn.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.gcn.A - torch.Size([3, 22, 22]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.gcn.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.gcn.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.gcn.conv.weight - torch.Size([768, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.gcn.conv.bias - torch.Size([768]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.0.0.weight - torch.Size([46, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.0.0.bias - torch.Size([46]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.0.1.weight - torch.Size([46]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.0.1.bias - torch.Size([46]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.0.3.conv.weight - torch.Size([46, 46, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.9.tcn.branches.0.3.conv.bias - torch.Size([46]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.9.tcn.branches.1.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.1.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.1.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.1.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.1.3.conv.weight - torch.Size([42, 42, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.9.tcn.branches.1.3.conv.bias - torch.Size([42]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.9.tcn.branches.2.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.2.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.2.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.2.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.2.3.conv.weight - torch.Size([42, 42, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.9.tcn.branches.2.3.conv.bias - torch.Size([42]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.9.tcn.branches.3.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.3.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.3.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.3.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.3.3.conv.weight - torch.Size([42, 42, 3, 1]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.9.tcn.branches.3.3.conv.bias - torch.Size([42]): 
+KaimingInit: a=0, mode=fan_out, nonlinearity=relu, distribution =normal, bias=0 
+
+backbone.gcn.9.tcn.branches.4.0.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.4.0.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.4.1.weight - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.4.1.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.5.weight - torch.Size([42, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.branches.5.bias - torch.Size([42]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.transform.0.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.transform.0.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.transform.2.weight - torch.Size([256, 256, 1, 1]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.transform.2.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+backbone.gcn.9.tcn.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of RecognizerGCN  
+
+cls_head.fc.weight - torch.Size([2, 256]): 
+NormalInit: mean=0, std=0.01, bias=0 
+
+cls_head.fc.bias - torch.Size([2]): 
+NormalInit: mean=0, std=0.01, bias=0 
+2024/11/20 19:41:32 - mmengine - INFO - Load checkpoint from modified_checkpoint.pth
+2024/11/20 19:41:32 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2024/11/20 19:41:32 - mmengine - INFO - Checkpoints will be saved to C:\Users\Jathu\OneDrive\Desktop\Masters of Biomedical Engineering - UofT\Fall 2024\BME 1570 - Intro to Digital Health\codebase\Testing_Code\work_dirs_wednesday_nosamples\lr_0.001_bs_16.
+2024/11/20 19:42:27 - mmengine - INFO - Epoch(train)  [1][ 20/225]  lr: 9.9993e-04  eta: 2:46:09  time: 2.7848  data_time: 2.3199  memory: 1597  loss: 0.7956  top1_acc: 0.5625  top5_acc: 1.0000  loss_cls: 0.7956
+2024/11/20 19:42:36 - mmengine - INFO - Epoch(train)  [1][ 40/225]  lr: 9.9971e-04  eta: 1:35:27  time: 0.4329  data_time: 0.0036  memory: 1753  loss: 0.4874  top1_acc: 0.8125  top5_acc: 1.0000  loss_cls: 0.4874
+2024/11/20 19:42:45 - mmengine - INFO - Epoch(train)  [1][ 60/225]  lr: 9.9934e-04  eta: 1:12:22  time: 0.4627  data_time: 0.0041  memory: 2081  loss: 0.4403  top1_acc: 0.7500  top5_acc: 1.0000  loss_cls: 0.4403
+2024/11/20 19:42:53 - mmengine - INFO - Epoch(train)  [1][ 80/225]  lr: 9.9881e-04  eta: 0:59:56  time: 0.4067  data_time: 0.0044  memory: 2081  loss: 0.3308  top1_acc: 0.8750  top5_acc: 1.0000  loss_cls: 0.3308
+2024/11/20 19:43:05 - mmengine - INFO - Epoch(train)  [1][100/225]  lr: 9.9814e-04  eta: 0:54:16  time: 0.5646  data_time: 0.0034  memory: 1795  loss: 0.3658  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.3658
+2024/11/20 19:43:14 - mmengine - INFO - Epoch(train)  [1][120/225]  lr: 9.9731e-04  eta: 0:49:22  time: 0.4559  data_time: 0.0047  memory: 1928  loss: 0.2937  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.2937
+2024/11/20 19:43:23 - mmengine - INFO - Epoch(train)  [1][140/225]  lr: 9.9633e-04  eta: 0:45:59  time: 0.4745  data_time: 0.0056  memory: 1858  loss: 0.3127  top1_acc: 0.8125  top5_acc: 1.0000  loss_cls: 0.3127
+2024/11/20 19:43:32 - mmengine - INFO - Epoch(train)  [1][160/225]  lr: 9.9519e-04  eta: 0:43:13  time: 0.4490  data_time: 0.0051  memory: 1759  loss: 0.3221  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.3221
+2024/11/20 19:43:41 - mmengine - INFO - Epoch(train)  [1][180/225]  lr: 9.9391e-04  eta: 0:41:04  time: 0.4542  data_time: 0.0044  memory: 1775  loss: 0.3165  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.3165
+2024/11/20 19:43:51 - mmengine - INFO - Epoch(train)  [1][200/225]  lr: 9.9248e-04  eta: 0:39:24  time: 0.4703  data_time: 0.0050  memory: 1928  loss: 0.3011  top1_acc: 0.8125  top5_acc: 1.0000  loss_cls: 0.3011
+2024/11/20 19:43:59 - mmengine - INFO - Epoch(train)  [1][220/225]  lr: 9.9090e-04  eta: 0:37:48  time: 0.4257  data_time: 0.0047  memory: 1928  loss: 0.2892  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.2892
+2024/11/20 19:44:01 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_193954
+2024/11/20 19:44:01 - mmengine - INFO - Epoch(train)  [1][225/225]  lr: 9.9048e-04  eta: 0:37:27  time: 0.4059  data_time: 0.0043  memory: 1533  loss: 0.2515  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.2515
+2024/11/20 19:44:01 - mmengine - INFO - Saving checkpoint at 1 epochs
+2024/11/20 19:45:05 - mmengine - INFO - Epoch(val) [1][7/7]    acc/top1: 0.8550  acc/top5: 1.0000  acc/mean1: 0.8550  data_time: 8.4155  time: 8.8702
+2024/11/20 19:45:06 - mmengine - INFO - The best checkpoint with 0.8550 acc/top1 at 1 epoch is saved to best_acc_top1_epoch_1.pth.
+2024/11/20 19:45:15 - mmengine - INFO - Epoch(train)  [2][ 20/225]  lr: 9.8871e-04  eta: 0:36:10  time: 0.4335  data_time: 0.0049  memory: 1858  loss: 0.1505  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.1505
+2024/11/20 19:45:25 - mmengine - INFO - Epoch(train)  [2][ 40/225]  lr: 9.8679e-04  eta: 0:35:16  time: 0.4852  data_time: 0.0035  memory: 1928  loss: 0.1570  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.1570
+2024/11/20 19:45:34 - mmengine - INFO - Epoch(train)  [2][ 60/225]  lr: 9.8472e-04  eta: 0:34:19  time: 0.4421  data_time: 0.0041  memory: 1717  loss: 0.2118  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.2118
+2024/11/20 19:45:43 - mmengine - INFO - Epoch(train)  [2][ 80/225]  lr: 9.8251e-04  eta: 0:33:29  time: 0.4507  data_time: 0.0038  memory: 1572  loss: 0.1373  top1_acc: 0.8750  top5_acc: 1.0000  loss_cls: 0.1373
+2024/11/20 19:45:52 - mmengine - INFO - Epoch(train)  [2][100/225]  lr: 9.8015e-04  eta: 0:32:43  time: 0.4414  data_time: 0.0061  memory: 1753  loss: 0.2180  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.2180
+2024/11/20 19:46:01 - mmengine - INFO - Epoch(train)  [2][120/225]  lr: 9.7764e-04  eta: 0:32:04  time: 0.4551  data_time: 0.0077  memory: 1928  loss: 0.1426  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.1426
+2024/11/20 19:46:11 - mmengine - INFO - Epoch(train)  [2][140/225]  lr: 9.7499e-04  eta: 0:31:33  time: 0.4822  data_time: 0.0046  memory: 2081  loss: 0.1765  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.1765
+2024/11/20 19:46:20 - mmengine - INFO - Epoch(train)  [2][160/225]  lr: 9.7219e-04  eta: 0:31:04  time: 0.4831  data_time: 0.0041  memory: 1795  loss: 0.1267  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.1267
+2024/11/20 19:46:30 - mmengine - INFO - Epoch(train)  [2][180/225]  lr: 9.6925e-04  eta: 0:30:38  time: 0.4873  data_time: 0.0050  memory: 2081  loss: 0.1439  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.1439
+2024/11/20 19:46:39 - mmengine - INFO - Epoch(train)  [2][200/225]  lr: 9.6616e-04  eta: 0:30:08  time: 0.4555  data_time: 0.0040  memory: 1775  loss: 0.1199  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.1199
+2024/11/20 19:46:48 - mmengine - INFO - Epoch(train)  [2][220/225]  lr: 9.6294e-04  eta: 0:29:41  time: 0.4579  data_time: 0.0049  memory: 1598  loss: 0.1094  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.1094
+2024/11/20 19:46:50 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_193954
+2024/11/20 19:46:50 - mmengine - INFO - Epoch(train)  [2][225/225]  lr: 9.6211e-04  eta: 0:29:31  time: 0.4268  data_time: 0.0040  memory: 1358  loss: 0.0935  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0935
+2024/11/20 19:46:50 - mmengine - INFO - Saving checkpoint at 2 epochs
+2024/11/20 19:46:55 - mmengine - INFO - Epoch(val) [2][7/7]    acc/top1: 0.8600  acc/top5: 1.0000  acc/mean1: 0.8600  data_time: 0.0074  time: 0.4673
+2024/11/20 19:46:55 - mmengine - INFO - The previous best checkpoint C:\Users\Jathu\OneDrive\Desktop\Masters of Biomedical Engineering - UofT\Fall 2024\BME 1570 - Intro to Digital Health\codebase\Testing_Code\work_dirs_wednesday_nosamples\lr_0.001_bs_16\best_acc_top1_epoch_1.pth is removed
+2024/11/20 19:46:56 - mmengine - INFO - The best checkpoint with 0.8600 acc/top1 at 2 epoch is saved to best_acc_top1_epoch_2.pth.
+2024/11/20 19:47:07 - mmengine - INFO - Epoch(train)  [3][ 20/225]  lr: 9.5870e-04  eta: 0:29:03  time: 0.4350  data_time: 0.0069  memory: 2081  loss: 0.1095  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.1095
+2024/11/20 19:47:17 - mmengine - INFO - Epoch(train)  [3][ 40/225]  lr: 9.5516e-04  eta: 0:28:46  time: 0.5146  data_time: 0.0039  memory: 1775  loss: 0.1000  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.1000
+2024/11/20 19:47:26 - mmengine - INFO - Epoch(train)  [3][ 60/225]  lr: 9.5148e-04  eta: 0:28:25  time: 0.4731  data_time: 0.0058  memory: 1753  loss: 0.1976  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.1976
+2024/11/20 19:47:36 - mmengine - INFO - Epoch(train)  [3][ 80/225]  lr: 9.4766e-04  eta: 0:28:04  time: 0.4669  data_time: 0.0040  memory: 1775  loss: 0.0831  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.0831
+2024/11/20 19:47:45 - mmengine - INFO - Epoch(train)  [3][100/225]  lr: 9.4371e-04  eta: 0:27:44  time: 0.4603  data_time: 0.0046  memory: 1928  loss: 0.0893  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.0893
+2024/11/20 19:47:54 - mmengine - INFO - Epoch(train)  [3][120/225]  lr: 9.3962e-04  eta: 0:27:25  time: 0.4761  data_time: 0.0042  memory: 1928  loss: 0.0924  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.0924
+2024/11/20 19:48:04 - mmengine - INFO - Epoch(train)  [3][140/225]  lr: 9.3539e-04  eta: 0:27:08  time: 0.4772  data_time: 0.0052  memory: 1597  loss: 0.0935  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.0935
+2024/11/20 19:48:13 - mmengine - INFO - Epoch(train)  [3][160/225]  lr: 9.3104e-04  eta: 0:26:48  time: 0.4534  data_time: 0.0040  memory: 2081  loss: 0.1286  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.1286
+2024/11/20 19:48:22 - mmengine - INFO - Epoch(train)  [3][180/225]  lr: 9.2655e-04  eta: 0:26:29  time: 0.4461  data_time: 0.0050  memory: 1928  loss: 0.0979  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0979
+2024/11/20 19:48:31 - mmengine - INFO - Epoch(train)  [3][200/225]  lr: 9.2193e-04  eta: 0:26:10  time: 0.4420  data_time: 0.0042  memory: 1858  loss: 0.0911  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0911
+2024/11/20 19:48:40 - mmengine - INFO - Epoch(train)  [3][220/225]  lr: 9.1718e-04  eta: 0:25:52  time: 0.4465  data_time: 0.0054  memory: 1858  loss: 0.1265  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.1265
+2024/11/20 19:48:42 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_193954
+2024/11/20 19:48:42 - mmengine - INFO - Epoch(train)  [3][225/225]  lr: 9.1598e-04  eta: 0:25:46  time: 0.4296  data_time: 0.0045  memory: 1537  loss: 0.1369  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.1369
+2024/11/20 19:48:42 - mmengine - INFO - Saving checkpoint at 3 epochs
+2024/11/20 19:48:46 - mmengine - INFO - Epoch(val) [3][7/7]    acc/top1: 0.7750  acc/top5: 1.0000  acc/mean1: 0.7750  data_time: 0.0072  time: 0.4529
+2024/11/20 19:48:55 - mmengine - INFO - Epoch(train)  [4][ 20/225]  lr: 9.1107e-04  eta: 0:25:29  time: 0.4524  data_time: 0.0062  memory: 1928  loss: 0.0751  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0751
+2024/11/20 19:49:05 - mmengine - INFO - Epoch(train)  [4][ 40/225]  lr: 9.0604e-04  eta: 0:25:12  time: 0.4530  data_time: 0.0046  memory: 1775  loss: 0.0939  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0939
+2024/11/20 19:49:13 - mmengine - INFO - Epoch(train)  [4][ 60/225]  lr: 9.0089e-04  eta: 0:24:54  time: 0.4293  data_time: 0.0059  memory: 1858  loss: 0.0719  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0719
+2024/11/20 19:49:22 - mmengine - INFO - Epoch(train)  [4][ 80/225]  lr: 8.9561e-04  eta: 0:24:39  time: 0.4570  data_time: 0.0045  memory: 1775  loss: 0.0411  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0411
+2024/11/20 19:49:31 - mmengine - INFO - Epoch(train)  [4][100/225]  lr: 8.9022e-04  eta: 0:24:23  time: 0.4451  data_time: 0.0057  memory: 1598  loss: 0.0592  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0592
+2024/11/20 19:49:40 - mmengine - INFO - Epoch(train)  [4][120/225]  lr: 8.8470e-04  eta: 0:24:08  time: 0.4472  data_time: 0.0051  memory: 1759  loss: 0.1228  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.1228
+2024/11/20 19:49:49 - mmengine - INFO - Epoch(train)  [4][140/225]  lr: 8.7907e-04  eta: 0:23:54  time: 0.4631  data_time: 0.0055  memory: 2081  loss: 0.1630  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.1630
+2024/11/20 19:49:59 - mmengine - INFO - Epoch(train)  [4][160/225]  lr: 8.7332e-04  eta: 0:23:40  time: 0.4690  data_time: 0.0046  memory: 1753  loss: 0.0860  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0860
+2024/11/20 19:50:08 - mmengine - INFO - Epoch(train)  [4][180/225]  lr: 8.6746e-04  eta: 0:23:27  time: 0.4618  data_time: 0.0054  memory: 2081  loss: 0.0646  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0646
+2024/11/20 19:50:18 - mmengine - INFO - Epoch(train)  [4][200/225]  lr: 8.6148e-04  eta: 0:23:15  time: 0.4917  data_time: 0.0049  memory: 1928  loss: 0.0497  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0497
+2024/11/20 19:50:26 - mmengine - INFO - Epoch(train)  [4][220/225]  lr: 8.5540e-04  eta: 0:23:00  time: 0.4329  data_time: 0.0051  memory: 1795  loss: 0.0366  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.0366
+2024/11/20 19:50:29 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_193954
+2024/11/20 19:50:29 - mmengine - INFO - Epoch(train)  [4][225/225]  lr: 8.5386e-04  eta: 0:22:58  time: 0.4548  data_time: 0.0046  memory: 1347  loss: 0.0462  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0462
+2024/11/20 19:50:29 - mmengine - INFO - Saving checkpoint at 4 epochs
+2024/11/20 19:50:34 - mmengine - INFO - Epoch(val) [4][7/7]    acc/top1: 0.8550  acc/top5: 1.0000  acc/mean1: 0.8550  data_time: 0.0217  time: 0.4815
+2024/11/20 19:50:43 - mmengine - INFO - Epoch(train)  [5][ 20/225]  lr: 8.4764e-04  eta: 0:22:45  time: 0.4532  data_time: 0.0062  memory: 1795  loss: 0.0726  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0726
+2024/11/20 19:50:53 - mmengine - INFO - Epoch(train)  [5][ 40/225]  lr: 8.4132e-04  eta: 0:22:33  time: 0.4931  data_time: 0.0048  memory: 2081  loss: 0.0290  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0290
+2024/11/20 19:51:03 - mmengine - INFO - Epoch(train)  [5][ 60/225]  lr: 8.3489e-04  eta: 0:22:23  time: 0.5069  data_time: 0.0054  memory: 1759  loss: 0.0620  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0620
+2024/11/20 19:51:12 - mmengine - INFO - Epoch(train)  [5][ 80/225]  lr: 8.2836e-04  eta: 0:22:11  time: 0.4655  data_time: 0.0047  memory: 1717  loss: 0.0261  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0261
+2024/11/20 19:51:22 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_193954
+2024/11/20 19:51:22 - mmengine - INFO - Epoch(train)  [5][100/225]  lr: 8.2173e-04  eta: 0:21:59  time: 0.4842  data_time: 0.0054  memory: 1708  loss: 0.0251  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0251
+2024/11/20 19:51:30 - mmengine - INFO - Epoch(train)  [5][120/225]  lr: 8.1500e-04  eta: 0:21:43  time: 0.3919  data_time: 0.0047  memory: 1858  loss: 0.0669  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0669
+2024/11/20 19:51:40 - mmengine - INFO - Epoch(train)  [5][140/225]  lr: 8.0817e-04  eta: 0:21:32  time: 0.4802  data_time: 0.0053  memory: 1928  loss: 0.0550  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.0550
+2024/11/20 19:51:49 - mmengine - INFO - Epoch(train)  [5][160/225]  lr: 8.0126e-04  eta: 0:21:19  time: 0.4533  data_time: 0.0046  memory: 1858  loss: 0.0553  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0553
+2024/11/20 19:51:59 - mmengine - INFO - Epoch(train)  [5][180/225]  lr: 7.9425e-04  eta: 0:21:09  time: 0.5055  data_time: 0.0054  memory: 1597  loss: 0.0441  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0441
+2024/11/20 19:52:08 - mmengine - INFO - Epoch(train)  [5][200/225]  lr: 7.8715e-04  eta: 0:20:57  time: 0.4585  data_time: 0.0045  memory: 1928  loss: 0.0440  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0440
+2024/11/20 19:52:16 - mmengine - INFO - Epoch(train)  [5][220/225]  lr: 7.7996e-04  eta: 0:20:44  time: 0.4261  data_time: 0.0054  memory: 1598  loss: 0.0276  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.0276
+2024/11/20 19:52:19 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_193954
+2024/11/20 19:52:19 - mmengine - INFO - Epoch(train)  [5][225/225]  lr: 7.7815e-04  eta: 0:20:41  time: 0.3970  data_time: 0.0045  memory: 1358  loss: 0.0423  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0423
+2024/11/20 19:52:19 - mmengine - INFO - Saving checkpoint at 5 epochs
+2024/11/20 19:52:24 - mmengine - INFO - Epoch(val) [5][7/7]    acc/top1: 0.7700  acc/top5: 1.0000  acc/mean1: 0.7700  data_time: 0.0070  time: 0.4545
+2024/11/20 19:52:31 - mmengine - INFO - Epoch(train)  [6][ 20/225]  lr: 7.7085e-04  eta: 0:20:26  time: 0.3975  data_time: 0.0066  memory: 1759  loss: 0.0428  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0428
+2024/11/20 19:52:40 - mmengine - INFO - Epoch(train)  [6][ 40/225]  lr: 7.6348e-04  eta: 0:20:13  time: 0.4291  data_time: 0.0049  memory: 1759  loss: 0.0302  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0302
+2024/11/20 19:52:48 - mmengine - INFO - Epoch(train)  [6][ 60/225]  lr: 7.5602e-04  eta: 0:20:00  time: 0.4182  data_time: 0.0060  memory: 1717  loss: 0.0285  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0285
+2024/11/20 19:52:58 - mmengine - INFO - Epoch(train)  [6][ 80/225]  lr: 7.4849e-04  eta: 0:19:49  time: 0.4762  data_time: 0.0046  memory: 1858  loss: 0.0327  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.0327
+2024/11/20 19:53:07 - mmengine - INFO - Epoch(train)  [6][100/225]  lr: 7.4088e-04  eta: 0:19:38  time: 0.4730  data_time: 0.0051  memory: 1928  loss: 0.0374  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0374
+2024/11/20 19:53:17 - mmengine - INFO - Epoch(train)  [6][120/225]  lr: 7.3319e-04  eta: 0:19:29  time: 0.5002  data_time: 0.0045  memory: 1795  loss: 0.0198  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0198
+2024/11/20 19:53:27 - mmengine - INFO - Epoch(train)  [6][140/225]  lr: 7.2544e-04  eta: 0:19:19  time: 0.4956  data_time: 0.0051  memory: 1775  loss: 0.0215  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0215
+2024/11/20 19:53:36 - mmengine - INFO - Epoch(train)  [6][160/225]  lr: 7.1762e-04  eta: 0:19:06  time: 0.4166  data_time: 0.0047  memory: 1928  loss: 0.0250  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0250
+2024/11/20 19:53:44 - mmengine - INFO - Epoch(train)  [6][180/225]  lr: 7.0973e-04  eta: 0:18:53  time: 0.4096  data_time: 0.0058  memory: 1537  loss: 0.0623  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0623
+2024/11/20 19:53:54 - mmengine - INFO - Epoch(train)  [6][200/225]  lr: 7.0177e-04  eta: 0:18:44  time: 0.5151  data_time: 0.0049  memory: 2081  loss: 0.0251  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0251
+2024/11/20 19:54:04 - mmengine - INFO - Epoch(train)  [6][220/225]  lr: 6.9376e-04  eta: 0:18:33  time: 0.4682  data_time: 0.0053  memory: 2081  loss: 0.0307  top1_acc: 0.9375  top5_acc: 1.0000  loss_cls: 0.0307
+2024/11/20 19:54:06 - mmengine - INFO - Exp name: stgcn_custom_exercise_20241120_193954
+2024/11/20 19:54:06 - mmengine - INFO - Epoch(train)  [6][225/225]  lr: 6.9174e-04  eta: 0:18:30  time: 0.4739  data_time: 0.0042  memory: 1598  loss: 0.0319  top1_acc: 1.0000  top5_acc: 1.0000  loss_cls: 0.0319
+2024/11/20 19:54:06 - mmengine - INFO - Saving checkpoint at 6 epochs
+2024/11/20 19:54:11 - mmengine - INFO - Epoch(val) [6][7/7]    acc/top1: 0.8900  acc/top5: 1.0000  acc/mean1: 0.8900  data_time: 0.0072  time: 0.4772
+2024/11/20 19:54:11 - mmengine - INFO - The previous best checkpoint C:\Users\Jathu\OneDrive\Desktop\Masters of Biomedical Engineering - UofT\Fall 2024\BME 1570 - Intro to Digital Health\codebase\Testing_Code\work_dirs_wednesday_nosamples\lr_0.001_bs_16\best_acc_top1_epoch_2.pth is removed
+2024/11/20 19:54:12 - mmengine - INFO - The best checkpoint with 0.8900 acc/top1 at 6 epoch is saved to best_acc_top1_epoch_6.pth.
+2024/11/20 19:54:13 - mmengine - INFO - the monitored metric did not improve in the last 5 records. best score: 0.855. 
+2024/11/20 19:54:18 - mmengine - INFO - Epoch(val) [6][7/7]    acc/top1: 0.8900  acc/top5: 1.0000  acc/mean1: 0.8900  data_time: 0.0091  time: 0.4346
+2024/11/20 19:54:18 - mmengine - INFO - the monitored metric did not improve in the last 6 records. best score: 0.855. 
