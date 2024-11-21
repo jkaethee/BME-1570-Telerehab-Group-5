@@ -1,7 +1,7 @@
 _base_ = '../mmaction2/configs/_base_/default_runtime.py'
 
 loso_dir ='../loso'
-ann_file = '../datasets/2class-all/loso_split_s01.pkl'
+ann_file = '../datasets/80-20-split/80_20.pkl'
 
 load_from = 'modified_checkpoint.pth' # See jupyternotebook for code to generate this
 
@@ -55,7 +55,7 @@ dataset_type = 'PoseDataset'
 
 train_pipeline = [
     dict(type='GenSkeFeat', dataset='coco', feats=['jm']),
-    dict(type='UniformSampleFrames', clip_len=100),
+    # dict(type='UniformSampleFrames', clip_len=100),
     dict(type='PoseDecode'),
     dict(type='FormatGCNInput', num_person=1),
     dict(type='PackActionInputs')
@@ -70,7 +70,7 @@ train_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
         type='RepeatDataset',
-        times=5,
+        times=2,
         dataset=dict(
             type=dataset_type,
             ann_file=ann_file,
@@ -82,7 +82,7 @@ val_dataloader = dict(
     batch_size=32,
     num_workers=8,
     persistent_workers=True,
-    sampler=dict(type='DefaultSampler', shuffle=True),
+    sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type=dataset_type,
         ann_file=ann_file,
