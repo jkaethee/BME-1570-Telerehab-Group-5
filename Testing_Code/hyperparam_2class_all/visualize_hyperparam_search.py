@@ -44,7 +44,7 @@ for result in top_results:
     ax.text(learning_rate, batch_size, repeat_dataset, label, fontsize=8)
 
 # Add labels and title
-ax.set_title("Hyperparameter Grid Search Accuracy")
+ax.set_title("Hyperparameter Grid Search Validation Accuracy")
 ax.set_xlabel("Learning Rate (LR)")
 ax.set_ylabel("Batch Size (BS)")
 ax.set_zlabel("Repeat Dataset (RD)")
