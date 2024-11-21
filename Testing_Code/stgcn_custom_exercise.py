@@ -95,7 +95,8 @@ train_cfg = dict(
 )
 val_cfg = dict(type='ValLoop')
 val_evaluator = [
-    dict(type='AccMetric')
+    dict(type='AccMetric'),
+    dict(type='ConfusionMatrix', num_classes=2)
 ]
 default_hooks = dict(
     checkpoint=dict(type='CheckpointHook', interval=1, save_best='auto'),  # Saves the best checkpoint
