@@ -1,0 +1,12 @@
+{'pkl_file': 'loso_split_s01.pkl', 'metrics': {'acc/top1': 0.845, 'acc/top5': 1.0, 'acc/mean1': 0.845, 'confusion_matrix/result': tensor([[95,  5],
+        [26, 74]])}}
+{'pkl_file': 'loso_split_s02.pkl', 'metrics': {'acc/top1': 0.845, 'acc/top5': 1.0, 'acc/mean1': 0.845, 'confusion_matrix/result': tensor([[81, 19],
+        [12, 88]])}}
+{'pkl_file': 'loso_split_s03.pkl', 'metrics': {'acc/top1': 0.85, 'acc/top5': 1.0, 'acc/mean1': 0.85, 'confusion_matrix/result': tensor([[76, 24],
+        [ 6, 94]])}}
+{'pkl_file': 'loso_split_s04.pkl', 'metrics': {'acc/top1': 0.9, 'acc/top5': 1.0, 'acc/mean1': 0.8999999999999999, 'confusion_matrix/result': tensor([[95,  5],
+        [15, 85]])}}
+{'pkl_file': 'loso_split_s05.pkl', 'metrics': {'acc/top1': 0.865, 'acc/top5': 1.0, 'acc/mean1': 0.865, 'confusion_matrix/result': tensor([[77, 23],
+        [ 4, 96]])}}
+{'pkl_file': 'loso_split_s06.pkl', 'metrics': {'acc/top1': 0.83, 'acc/top5': 1.0, 'acc/mean1': 0.8300000000000001, 'confusion_matrix/result': tensor([[80, 20],
+        [14, 86]])}}

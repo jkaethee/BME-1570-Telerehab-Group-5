@@ -1,0 +1,4 @@
+{'pkl_file': 'loso_split_s01.pkl', 'metrics': {'acc/top1': 0.845, 'acc/top5': 1.0, 'acc/mean1': 0.845, 'confusion_matrix/result': tensor([[95,  5],
+        [26, 74]])}}
+{'pkl_file': 'loso_split_s02.pkl', 'metrics': {'acc/top1': 0.845, 'acc/top5': 1.0, 'acc/mean1': 0.845, 'confusion_matrix/result': tensor([[81, 19],
+        [12, 88]])}}
