@@ -18,7 +18,7 @@
    ```
 5. Navigate to the `mmaction2` directory and replace the tools/train.py file with the `train.py` file provided in the `Testing_Code` directory. This file has modified the code to run hyperparameter tuning and LOSO validation.
 6. If you are doing hyperparameter tuning please uncomment the call for `hyperparam_grid_search(cfg)` and comment out the code below it. If you are doing LOSO validation please leave the file as is.
-7. Whether you are doing hyperparameter tuning or LOSO validation, the command to train and validate the model is the same:
+7. Whether you are doing hyperparameter tuning or LOSO validation, the command to train and validate the model is the same. Navigate to the `Testing_Code` directory and run:
    ```
    python ../mmaction2/tools/train.py stgcn_custom_exercise.py --seed 0 --deterministic
    ```
