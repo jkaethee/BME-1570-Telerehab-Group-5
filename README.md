@@ -1,6 +1,7 @@
 # BME-1570-Telerehab-Group-5
 
 ## Instructions for running:
+* Note: If you don't want to generate the dataset files again, proceed to step 4
 1. Clone the repo
 2. Run all cells in the UI-PRMD20pre-processing.ipynb notebook to generate the preprocessed `.npy` files of 3D skeletal data
 3. Navigate to the `datasets` folder and run `2class-all/generate_splits.ipynb` and `80-20-split/generate_splits/ipynb`. This will generate the necessary PKL files for hyperparameter tuning and LOSO validation.
