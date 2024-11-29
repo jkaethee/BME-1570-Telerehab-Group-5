@@ -334,7 +334,7 @@ def main():
     data_dir = Path("../datasets/2class-all")
     eval_metrics_list = []
     for pkl_file in data_dir.iterdir():
-        if (pkl_file.is_file and pkl_file.suffix == '.pkl' and pkl_file.name == cfg.file_name):
+        if (pkl_file.is_file and pkl_file.suffix == '.pkl'):
             ann_file = str(pkl_file)
             eval_metrics, dir_path = loso_validation(cfg, ann_file, pkl_file.name)
             eval_metrics_list.append({"pkl_file": pkl_file.name, "metrics": eval_metrics})
